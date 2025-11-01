@@ -361,3 +361,171 @@ INSERT INTO `settings` (`setting_key`, `setting_value`) VALUES
 -- =============================================
 -- K?t th?c Database Schema
 -- =============================================
+
+-- =============================================
+-- Additional Tables for E-Learning Features
+-- =============================================
+
+-- Bảng bài tập (Assignments)
+CREATE TABLE IF NOT EXISTS `assignments` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `course_id` INT UNSIGNED NOT NULL,
+  `title` VARCHAR(255) NOT NULL,
+  `description` TEXT,
+  `due_date` DATETIME NOT NULL,
+  `max_points` INT UNSIGNED DEFAULT 100,
+  `allow_late` BOOLEAN DEFAULT FALSE,
+  `file_required` BOOLEAN DEFAULT FALSE,
+  `created_by` INT UNSIGNED NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`created_by`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  INDEX `idx_course` (`course_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bảng nộp bài tập
+CREATE TABLE IF NOT EXISTS `assignment_submissions` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `assignment_id` INT UNSIGNED NOT NULL,
+  `user_id` INT UNSIGNED NOT NULL,
+  `content` TEXT,
+  `file_path` VARCHAR(255) DEFAULT NULL,
+  `submitted_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `grade` DECIMAL(5,2) DEFAULT NULL,
+  `feedback` TEXT DEFAULT NULL,
+  `status` ENUM('submitted', 'graded', 'late') DEFAULT 'submitted',
+  `graded_at` DATETIME DEFAULT NULL,
+  FOREIGN KEY (`assignment_id`) REFERENCES `assignments`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  UNIQUE KEY `unique_submission` (`assignment_id`, `user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bảng lịch học/sự kiện
+CREATE TABLE IF NOT EXISTS `calendar_events` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `course_id` INT UNSIGNED NOT NULL,
+  `title` VARCHAR(255) NOT NULL,
+  `description` TEXT,
+  `event_type` ENUM('class', 'exam', 'assignment', 'meeting', 'other') DEFAULT 'class',
+  `start_date` DATETIME NOT NULL,
+  `end_date` DATETIME NOT NULL,
+  `location` VARCHAR(255) DEFAULT NULL,
+  `meeting_url` VARCHAR(500) DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`) ON DELETE CASCADE,
+  INDEX `idx_course` (`course_id`),
+  INDEX `idx_dates` (`start_date`, `end_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bảng ghi chú
+CREATE TABLE IF NOT EXISTS `notes` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `user_id` INT UNSIGNED NOT NULL,
+  `lesson_id` INT UNSIGNED NOT NULL,
+  `content` TEXT NOT NULL,
+  `video_timestamp` INT UNSIGNED DEFAULT NULL COMMENT 'Thời điểm trong video (giây)',
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`lesson_id`) REFERENCES `lessons`(`id`) ON DELETE CASCADE,
+  INDEX `idx_user_lesson` (`user_id`, `lesson_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bảng đánh dấu/bookmark
+CREATE TABLE IF NOT EXISTS `bookmarks` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `user_id` INT UNSIGNED NOT NULL,
+  `lesson_id` INT UNSIGNED NOT NULL,
+  `note` VARCHAR(255) DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`lesson_id`) REFERENCES `lessons`(`id`) ON DELETE CASCADE,
+  UNIQUE KEY `unique_bookmark` (`user_id`, `lesson_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bảng thông báo khóa học
+CREATE TABLE IF NOT EXISTS `announcements` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `course_id` INT UNSIGNED NOT NULL,
+  `title` VARCHAR(255) NOT NULL,
+  `content` TEXT NOT NULL,
+  `is_pinned` BOOLEAN DEFAULT FALSE,
+  `created_by` INT UNSIGNED NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`created_by`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  INDEX `idx_course` (`course_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bảng discussion comments cho bài học
+CREATE TABLE IF NOT EXISTS `lesson_discussions` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `lesson_id` INT UNSIGNED NOT NULL,
+  `user_id` INT UNSIGNED NOT NULL,
+  `parent_id` INT UNSIGNED DEFAULT NULL COMMENT 'For replies',
+  `content` TEXT NOT NULL,
+  `is_resolved` BOOLEAN DEFAULT FALSE,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (`lesson_id`) REFERENCES `lessons`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`parent_id`) REFERENCES `lesson_discussions`(`id`) ON DELETE CASCADE,
+  INDEX `idx_lesson` (`lesson_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bảng lịch sử xem video
+CREATE TABLE IF NOT EXISTS `video_watch_history` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `user_id` INT UNSIGNED NOT NULL,
+  `lesson_id` INT UNSIGNED NOT NULL,
+  `watch_duration` INT UNSIGNED DEFAULT 0 COMMENT 'Số giây đã xem',
+  `last_position` INT UNSIGNED DEFAULT 0 COMMENT 'Vị trí cuối cùng (giây)',
+  `completed` BOOLEAN DEFAULT FALSE,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`lesson_id`) REFERENCES `lessons`(`id`) ON DELETE CASCADE,
+  UNIQUE KEY `unique_watch` (`user_id`, `lesson_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bảng nhóm học sinh
+CREATE TABLE IF NOT EXISTS `student_groups` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `course_id` INT UNSIGNED NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `description` TEXT,
+  `max_members` INT UNSIGNED DEFAULT NULL,
+  `created_by` INT UNSIGNED NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`created_by`) REFERENCES `users`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bảng thành viên nhóm
+CREATE TABLE IF NOT EXISTS `group_members` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `group_id` INT UNSIGNED NOT NULL,
+  `user_id` INT UNSIGNED NOT NULL,
+  `role` ENUM('leader', 'member') DEFAULT 'member',
+  `joined_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (`group_id`) REFERENCES `student_groups`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  UNIQUE KEY `unique_member` (`group_id`, `user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Bảng lịch sử thanh toán (nếu có khóa học trả phí)
+CREATE TABLE IF NOT EXISTS `payments` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `user_id` INT UNSIGNED NOT NULL,
+  `course_id` INT UNSIGNED NOT NULL,
+  `amount` DECIMAL(10,2) NOT NULL,
+  `payment_method` VARCHAR(50) DEFAULT NULL,
+  `transaction_id` VARCHAR(255) DEFAULT NULL,
+  `status` ENUM('pending', 'completed', 'failed', 'refunded') DEFAULT 'pending',
+  `paid_at` DATETIME DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`) ON DELETE CASCADE,
+  INDEX `idx_user` (`user_id`),
+  INDEX `idx_status` (`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
