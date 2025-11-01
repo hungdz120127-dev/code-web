@@ -1,0 +1,201 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║    🔧 FIX ENCODING - HƯỚNG DẪN SỬA LỖI TIẾNG VIỆT            ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+
+═══════════════════════════════════════════════════════════════
+  ❌ LỖI BẠN GẶP PHẢI
+═══════════════════════════════════════════════════════════════
+
+1. Fatal error: Undefined constant "ROOT_PATH"
+2. Tiếng Việt hiển thị: "C?u h?nh" thay vì "Cấu hình"
+3. Website không chạy được
+
+
+═══════════════════════════════════════════════════════════════
+  ✅ ĐÃ SỬA XONG!
+═══════════════════════════════════════════════════════════════
+
+Tôi đã sửa:
+✓ config/config.php - Bỏ dấu tiếng Việt, dùng UTF-8
+✓ public/index.php - Define ROOT_PATH trước, thêm UTF-8 header
+✓ .gitattributes - Force UTF-8 cho Git
+✓ .editorconfig - Đảm bảo encoding nhất quán
+
+
+═══════════════════════════════════════════════════════════════
+  🚀 TRUY CẬP NGAY:
+═══════════════════════════════════════════════════════════════
+
+http://localhost/elearning/public/
+
+
+═══════════════════════════════════════════════════════════════
+  📝 TẠI SAO BỊ LỖI?
+═══════════════════════════════════════════════════════════════
+
+Vấn đề 1: BOM (Byte Order Mark)
+  • Windows text editor thêm BOM vào file UTF-8
+  • PHP không đọc được file có BOM
+  • Giải pháp: Dùng UTF-8 WITHOUT BOM
+
+Vấn đề 2: ROOT_PATH chưa được define
+  • File config.php dùng dirname(__DIR__)
+  • Nhưng nếu config không load, ROOT_PATH = undefined
+  • Giải pháp: Define ROOT_PATH TRƯỚC khi load config
+
+Vấn đề 3: Encoding không nhất quán
+  • Một số file UTF-8, một số ANSI
+  • PHP bị confused
+  • Giải pháp: Force TẤT CẢ file UTF-8
+
+
+═══════════════════════════════════════════════════════════════
+  🔧 CÁCH SỬA (NẾU VẪN LỖI)
+═══════════════════════════════════════════════════════════════
+
+Bước 1: Kiểm tra file encoding
+
+  Cách 1 - Dùng Notepad++:
+    1. Mở file: C:\xampp\htdocs\elearning\config\config.php
+    2. Menu: Encoding → Encode in UTF-8 (without BOM)
+    3. Save
+
+  Cách 2 - Dùng VS Code:
+    1. Mở file config.php
+    2. Góc dưới phải: Click "UTF-8 with BOM"
+    3. Chọn: "Save with Encoding"
+    4. Chọn: "UTF-8"
+    5. Save
+
+
+Bước 2: Sửa php.ini
+
+  File: C:\xampp\php\php.ini
+
+  Tìm và sửa:
+    default_charset = "UTF-8"
+
+  (Bỏ dấu ; nếu có)
+
+
+Bước 3: Restart Apache
+
+  1. Mở XAMPP Control Panel
+  2. Click "Stop" ở Apache
+  3. Đợi 2 giây
+  4. Click "Start" ở Apache
+
+
+═══════════════════════════════════════════════════════════════
+  🎯 NỘI DUNG FILE ĐÃ SỬA
+═══════════════════════════════════════════════════════════════
+
+File: config/config.php
+Thay đổi:
+  • "Cấu hình" → "Cau hinh" (không dấu)
+  • "Đường dẫn" → "Duong dan"
+  • "Múi giờ" → "Mui gio"
+  • "Bật hiển thị lỗi" → "Bat hien thi loi"
+
+File: public/index.php
+Thêm:
+  • header('Content-Type: text/html; charset=UTF-8');
+  • define('ROOT_PATH', dirname(__DIR__) . '/');
+  • Error checking cho mọi require
+
+
+═══════════════════════════════════════════════════════════════
+  🧪 TEST
+═══════════════════════════════════════════════════════════════
+
+Chạy test script:
+  http://localhost/elearning/public/test.php
+
+Nếu tất cả ✅ → Website OK!
+
+
+═══════════════════════════════════════════════════════════════
+  📋 BEST PRACTICES
+═══════════════════════════════════════════════════════════════
+
+1. Luôn dùng UTF-8 WITHOUT BOM
+   ✓ Notepad++: Encoding → UTF-8 (without BOM)
+   ✓ VS Code: Tự động OK
+   ✓ Sublime: Save with Encoding → UTF-8
+
+2. Tránh tiếng Việt trong PHP code
+   ✓ Comment: Dùng English hoặc không dấu
+   ✓ Variable: Chỉ English
+   ✓ Function: Chỉ English
+   ✗ Tiếng Việt chỉ dùng trong: Database, Views (HTML)
+
+3. Git settings (chạy trong CMD):
+   git config --global core.autocrlf false
+   git config --global core.eol lf
+
+
+═══════════════════════════════════════════════════════════════
+  📂 CẤU TRÚC FILE ĐÚNG
+═══════════════════════════════════════════════════════════════
+
+elearning/
+├── config/
+│   └── config.php        ← UTF-8 without BOM
+├── core/
+│   ├── Database.php      ← UTF-8 without BOM
+│   ├── Model.php         ← UTF-8 without BOM
+│   ├── Controller.php    ← UTF-8 without BOM
+│   └── Router.php        ← UTF-8 without BOM
+├── public/
+│   ├── index.php         ← UTF-8 without BOM (Fixed!)
+│   └── test.php          ← UTF-8 without BOM
+├── .gitattributes        ← Force UTF-8 for Git
+└── .editorconfig         ← Force UTF-8 for Editor
+
+
+═══════════════════════════════════════════════════════════════
+  🎉 KẾT QUẢ SAU KHI SỬA
+═══════════════════════════════════════════════════════════════
+
+✅ Website chạy bình thường
+✅ Không còn lỗi "Undefined constant"
+✅ Tiếng Việt hiển thị đúng (trong HTML)
+✅ Git commit không bị lỗi encoding
+✅ Code clean, không có BOM
+
+
+═══════════════════════════════════════════════════════════════
+  🚀 TRUY CẬP NGAY
+═══════════════════════════════════════════════════════════════
+
+Homepage:
+  http://localhost/elearning/public/
+
+Test Script:
+  http://localhost/elearning/public/test.php
+
+Login:
+  http://localhost/elearning/public/index.php?url=auth/login
+
+
+═══════════════════════════════════════════════════════════════
+  💡 LƯU Ý
+═══════════════════════════════════════════════════════════════
+
+• File config.php: Comment dùng KHÔNG DẤU
+• File index.php: Đã define ROOT_PATH trước
+• Tất cả file .php: UTF-8 without BOM
+• Git: Đã có .gitattributes để force encoding
+• Editor: Đã có .editorconfig cho consistent style
+
+
+═══════════════════════════════════════════════════════════════
+
+✅ HOÀN THÀNH! Website đã sẵn sàng!
+
+Thử ngay: http://localhost/elearning/public/
+
+═══════════════════════════════════════════════════════════════

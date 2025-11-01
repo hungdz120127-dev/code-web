@@ -1,0 +1,38 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# PHP files should always use LF and UTF-8 encoding
+*.php text eol=lf encoding=UTF-8
+
+# SQL files
+*.sql text eol=lf encoding=UTF-8
+
+# JavaScript files
+*.js text eol=lf encoding=UTF-8
+
+# CSS files
+*.css text eol=lf encoding=UTF-8
+
+# Markdown files
+*.md text eol=lf encoding=UTF-8
+
+# HTML files
+*.html text eol=lf encoding=UTF-8
+
+# Configuration files
+*.json text eol=lf encoding=UTF-8
+*.xml text eol=lf encoding=UTF-8
+*.yml text eol=lf encoding=UTF-8
+*.yaml text eol=lf encoding=UTF-8
+
+# .htaccess
+.htaccess text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
