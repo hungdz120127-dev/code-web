@@ -3,14 +3,17 @@
  * Features: Dark/Light Mode, AJAX, Animations
  */
 
-// Theme Management
+// =============================================
+// Theme Management - Dark/Light Mode
+// =============================================
+
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
+const html = document.documentElement;
 
 // Load saved theme
 const savedTheme = localStorage.getItem('theme') || 'light';
-body.setAttribute('data-theme', savedTheme);
-updateThemeIcon(savedTheme);
+applyTheme(savedTheme);
 
 // Theme toggle event
 if (themeToggle) {
@@ -18,13 +21,18 @@ if (themeToggle) {
         const currentTheme = body.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         
-        body.setAttribute('data-theme', newTheme);
+        applyTheme(newTheme);
         localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
         
         // Show notification
         showNotification('?? chuy?n sang ch? ?? ' + (newTheme === 'dark' ? 't?i' : 's?ng'), 'info');
     });
+}
+
+function applyTheme(theme) {
+    body.setAttribute('data-theme', theme);
+    html.setAttribute('data-theme', theme);
+    updateThemeIcon(theme);
 }
 
 function updateThemeIcon(theme) {
@@ -35,6 +43,40 @@ function updateThemeIcon(theme) {
         }
     }
 }
+
+// =============================================
+// Performance Optimization
+// =============================================
+
+// Detect mobile device
+const isMobile = () => window.innerWidth <= 768;
+
+// Reduce animations on mobile
+if (isMobile()) {
+    document.body.classList.add('mobile-device');
+}
+
+// Debounce function for resize events
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Handle window resize
+window.addEventListener('resize', debounce(() => {
+    if (isMobile()) {
+        document.body.classList.add('mobile-device');
+    } else {
+        document.body.classList.remove('mobile-device');
+    }
+}, 250));
 
 // Notification System
 function showNotification(message, type = 'info') {
