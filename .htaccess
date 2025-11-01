@@ -1,6 +1,8 @@
+Options -Indexes
 RewriteEngine On
-RewriteBase /
 
-# Redirect to public folder
-RewriteCond %{REQUEST_URI} !^/public/
-RewriteRule ^(.*)$ public/$1 [L]
+# Redirect to public folder if accessing root
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/elearning/public/
+RewriteRule ^(.*)$ public/$1 [L,QSA]
