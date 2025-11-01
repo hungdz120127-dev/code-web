@@ -1,0 +1,487 @@
+# ?? Smart E-Learning Platform for Schools
+
+[![PHP Version](https://img.shields.io/badge/PHP-8.0+-blue.svg)](https://www.php.net/)
+[![MySQL](https://img.shields.io/badge/MySQL-5.7+-orange.svg)](https://www.mysql.com/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple.svg)](https://getbootstrap.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+> H? th?ng h?c t?p tr?c tuy?n th?ng minh d?nh cho m?i tr??ng h?c ???ng - Website E-Learning hi?n ??i, ??y ?? t?nh n?ng v?i giao di?n ??p m?t v? tr?i nghi?m ng??i d?ng tuy?t v?i.
+
+## ?? M?c l?c
+
+- [Gi?i thi?u](#gi?i-thi?u)
+- [T?nh n?ng n?i b?t](#t?nh-n?ng-n?i-b?t)
+- [C?ng ngh? s? d?ng](#c?ng-ngh?-s?-d?ng)
+- [Y?u c?u h? th?ng](#y?u-c?u-h?-th?ng)
+- [C?i ??t](#c?i-??t)
+- [C?u h?nh](#c?u-h?nh)
+- [S? d?ng](#s?-d?ng)
+- [C?u tr?c d? ?n](#c?u-tr?c-d?-?n)
+- [API Documentation](#api-documentation)
+- [Screenshots](#screenshots)
+- [??ng g?p](#??ng-g?p)
+- [License](#license)
+
+## ?? Gi?i thi?u
+
+Smart E-Learning Platform l? m?t h? th?ng h?c t?p tr?c tuy?n ho?n ch?nh ???c x?y d?ng v?i PHP 8 thu?n v? MySQL, tu?n theo ki?n tr?c MVC. D? ?n ???c thi?t k? ??c bi?t cho m?i tr??ng h?c ???ng, cung c?p n?n t?ng v?ng ch?c ?? gi?o vi?n gi?ng d?y v? h?c sinh t? h?c hi?u qu?.
+
+### ?? M?c ti?u
+
+- ? T?o m?i tr??ng h?c t?p tr?c tuy?n hi?n ??i
+- ? H? tr? gi?ng d?y v? h?c t?p t? xa
+- ? Theo d?i ti?n ?? h?c t?p chi ti?t
+- ? T??ng t?c tr?c ti?p gi?a gi?o vi?n v? h?c sinh
+- ? Gamification ?? t?ng ??ng l?c h?c t?p
+
+## ? T?nh n?ng n?i b?t
+
+### ????? D?nh cho H?c sinh
+
+- ?? **H?c t?p linh ho?t**: ??ng k? kh?a h?c, xem video b?i gi?ng, ??c t?i li?u
+- ?? **Quiz & B?i ki?m tra**: L?m b?i thi tr?c tuy?n v?i t? ??ng ch?m ?i?m
+- ?? **Theo d?i ti?n ??**: Xem % ho?n th?nh, th?ng k? ?i?m s?
+- ?? **Gamification**: 
+  - H? th?ng XP (kinh nghi?m)
+  - Level v? Badges (huy hi?u)
+  - B?ng x?p h?ng
+  - Ch?ng ch? PDF t? ??ng khi ho?n th?nh
+- ?? **T??ng t?c**:
+  - Di?n ??n h?i ??p
+  - Chat realtime v?i gi?o vi?n
+  - ??nh gi? kh?a h?c
+- ?? **Th?ng b?o**: Nh?n th?ng b?o v? b?i t?p m?i, ph?n h?i
+
+### ????? D?nh cho Gi?o vi?n
+
+- ?? **Qu?n l? kh?a h?c**: T?o, ch?nh s?a kh?a h?c theo ch??ng - b?i
+- ?? **N?i dung ?a d?ng**: Upload video, t?i li?u PDF/DOCX/PPTX
+- ? **Ng?n h?ng c?u h?i**: T?o quiz v?i nhi?u m?c ?? kh?
+- ?? **Th?ng k? chi ti?t**: 
+  - S? h?c vi?n
+  - ?i?m trung b?nh
+  - T? l? ho?n th?nh
+- ?? **Ph?n h?i h?c vi?n**: Tr? l?i c?u h?i, nh?n tin tr?c ti?p
+
+### ?? D?nh cho Admin
+
+- ?? **Qu?n l? ng??i d?ng**: CRUD users, ph?n quy?n
+- ?? **Qu?n l? kh?a h?c**: Duy?t, ?n/hi?n kh?a h?c
+- ?? **Dashboard th?ng k?**: 
+  - Bi?u ?? Chart.js
+  - B?o c?o ng??i d?ng, kh?a h?c
+  - Xu?t PDF/Excel
+- ?? **Backup/Restore**: Sao l?u database 1 click
+- ?? **C?i ??t h? th?ng**: C?u h?nh chung
+
+### ?? Giao di?n & UX
+
+- ?? **Dark/Light Mode**: Chuy?n ??i theme d? d?ng
+- ?? **Responsive Design**: Ho?t ??ng m??t m? tr?n m?i thi?t b?
+- ? **AJAX Loading**: Kh?ng reload trang, t?i nhanh
+- ?? **Animations**: AOS, Animate.css cho tr?i nghi?m sinh ??ng
+- ?? **Bootstrap 5**: Giao di?n hi?n ??i, components ??p m?t
+
+## ??? C?ng ngh? s? d?ng
+
+### Backend
+- **PHP 8.0+**: Ng?n ng? l?p tr?nh ch?nh
+- **MySQL/MariaDB**: C? s? d? li?u
+- **PDO**: Database abstraction layer
+- **MVC Pattern**: Ki?n tr?c r? r?ng, d? b?o tr?
+
+### Frontend
+- **HTML5**: C?u tr?c trang web
+- **CSS3**: Styling v?i custom properties
+- **JavaScript ES6+**: Logic frontend
+- **Bootstrap 5.3**: UI Framework
+- **Font Awesome 6**: Icons
+- **AOS**: Scroll animations
+- **Chart.js**: Bi?u ?? th?ng k?
+- **SweetAlert2**: Th?ng b?o ??p
+
+### Libraries & Tools
+- **TCPDF/FPDF**: T?o PDF certificates
+- **PHPMailer**: G?i email (optional)
+
+## ?? Y?u c?u h? th?ng
+
+- **XAMPP** ho?c **WAMP** ho?c **LAMP/LEMP**
+- **PHP**: >= 8.0
+- **MySQL**: >= 5.7 ho?c MariaDB >= 10.2
+- **Apache/Nginx**: Web server
+- **Extensions PHP**:
+  - PDO
+  - PDO_MySQL
+  - mbstring
+  - fileinfo
+  - gd (for image processing)
+  - json
+  - session
+
+## ?? C?i ??t
+
+### B??c 1: Clone ho?c Download d? ?n
+
+```bash
+# Clone repository (n?u c?)
+git clone https://github.com/yourusername/elearning-platform.git
+
+# Ho?c download ZIP v? gi?i n?n
+```
+
+### B??c 2: Copy v?o th? m?c XAMPP
+
+```bash
+# Windows
+C:\xampp\htdocs\elearning\
+
+# Linux/Mac
+/opt/lampp/htdocs/elearning/
+```
+
+### B??c 3: T?o Database
+
+1. M? **phpMyAdmin**: `http://localhost/phpmyadmin`
+2. T?o database m?i t?n: `elearning_db`
+3. Import file SQL: `config/database.sql`
+
+### B??c 4: C?u h?nh
+
+M? file `config/config.php` v? ch?nh s?a th?ng tin:
+
+```php
+// Database Configuration
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'elearning_db');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+
+// Base URL (ch?nh theo th? m?c c?a b?n)
+define('BASE_URL', 'http://localhost/elearning/');
+```
+
+### B??c 5: Ph?n quy?n th? m?c (Linux/Mac)
+
+```bash
+chmod -R 755 /opt/lampp/htdocs/elearning
+chmod -R 777 /opt/lampp/htdocs/elearning/public/uploads
+```
+
+### B??c 6: Kh?i ??ng Apache & MySQL
+
+- M? **XAMPP Control Panel**
+- Start **Apache** v? **MySQL**
+
+### B??c 7: Truy c?p website
+
+M? tr?nh duy?t v? truy c?p:
+```
+http://localhost/elearning/
+```
+
+## ?? T?i kho?n m?c ??nh
+
+Sau khi import database, b?n c? th? ??ng nh?p v?i c?c t?i kho?n sau:
+
+| Role | Email | Password | M? t? |
+|------|-------|----------|-------|
+| **Admin** | admin@elearning.com | admin123 | Qu?n tr? vi?n |
+| **Teacher** | teacher@elearning.com | admin123 | Gi?o vi?n |
+| **Student** | student@elearning.com | admin123 | H?c sinh |
+
+> ?? **L?u ?**: ??i m?t kh?u ngay sau khi ??ng nh?p l?n ??u!
+
+## ?? C?u h?nh
+
+### Upload Files
+
+Ch?nh s?a trong `config/config.php`:
+
+```php
+// K?ch th??c file t?i ?a (bytes)
+define('MAX_FILE_SIZE', 10 * 1024 * 1024); // 10MB
+
+// Lo?i file cho ph?p
+define('ALLOWED_IMAGE_TYPES', ['image/jpeg', 'image/png', 'image/gif']);
+define('ALLOWED_DOC_TYPES', ['application/pdf', ...]);
+```
+
+### Gamification
+
+```php
+// ?i?m XP
+define('XP_PER_LESSON', 50);      // Ho?n th?nh b?i h?c
+define('XP_PER_QUIZ', 100);       // Ho?n th?nh quiz
+define('XP_PER_COURSE_COMPLETE', 500); // Ho?n th?nh kh?a h?c
+```
+
+### Email Configuration (Optional)
+
+```php
+// SMTP Settings
+define('SMTP_HOST', 'smtp.gmail.com');
+define('SMTP_PORT', 587);
+define('SMTP_USER', 'your-email@gmail.com');
+define('SMTP_PASS', 'your-password');
+```
+
+## ?? S? d?ng
+
+### ??ng k? t?i kho?n m?i
+
+1. Truy c?p: `http://localhost/elearning/auth/register`
+2. ?i?n th?ng tin: T?n, Email, M?t kh?u
+3. Ch?n vai tr?: H?c sinh ho?c Gi?o vi?n
+4. Click **??ng k?**
+
+### H?c sinh - ??ng k? kh?a h?c
+
+1. ??ng nh?p
+2. V?o **Kh?a h?c** ? Ch?n kh?a h?c
+3. Click **??ng k? kh?a h?c**
+4. B?t ??u h?c t? **Dashboard**
+
+### Gi?o vi?n - T?o kh?a h?c
+
+1. ??ng nh?p v?i t?i kho?n gi?o vi?n
+2. V?o **Dashboard** ? **T?o kh?a h?c**
+3. ?i?n th?ng tin:
+   - Ti?u ??, m? t?
+   - Upload thumbnail
+   - Th?m ch??ng v? b?i h?c
+   - T?o quiz
+4. Xu?t b?n kh?a h?c
+
+### Admin - Qu?n l? h? th?ng
+
+1. ??ng nh?p v?i t?i kho?n admin
+2. Truy c?p: `http://localhost/elearning/admin`
+3. Qu?n l?:
+   - Ng??i d?ng
+   - Kh?a h?c
+   - Backup database
+   - C?i ??t h? th?ng
+
+## ?? C?u tr?c d? ?n
+
+```
+elearning/
+??? config/
+?   ??? config.php          # C?u h?nh chung
+?   ??? database.sql        # File SQL import
+??? core/
+?   ??? Database.php        # Database connection
+?   ??? Model.php           # Base Model
+?   ??? Controller.php      # Base Controller
+?   ??? Router.php          # URL Routing
+??? models/
+?   ??? User.php            # User model
+?   ??? Course.php          # Course model
+?   ??? Lesson.php          # Lesson model
+?   ??? Quiz.php            # Quiz model
+?   ??? Forum.php           # Forum model
+?   ??? Chat.php            # Chat model
+?   ??? Certificate.php     # Certificate model
+?   ??? Badge.php           # Badge model
+?   ??? ...
+??? controllers/
+?   ??? HomeController.php      # Trang ch?
+?   ??? AuthController.php      # ??ng nh?p/??ng k?
+?   ??? DashboardController.php # Dashboard
+?   ??? CourseController.php    # Kh?a h?c
+?   ??? QuizController.php      # Quiz
+?   ??? ForumController.php     # Di?n ??n
+?   ??? ChatController.php      # Chat
+?   ??? AdminController.php     # Admin
+?   ??? ...
+??? views/
+?   ??? layouts/
+?   ?   ??? header.php      # Header chung
+?   ?   ??? footer.php      # Footer chung
+?   ??? home/
+?   ?   ??? index.php       # Trang ch?
+?   ??? auth/
+?   ?   ??? login.php       # ??ng nh?p
+?   ?   ??? register.php    # ??ng k?
+?   ?   ??? profile.php     # H? s?
+?   ??? dashboard/
+?   ?   ??? student.php     # Dashboard h?c sinh
+?   ?   ??? teacher.php     # Dashboard gi?o vi?n
+?   ??? course/
+?   ?   ??? index.php       # Danh s?ch kh?a h?c
+?   ?   ??? view.php        # Chi ti?t kh?a h?c
+?   ?   ??? learn.php       # H?c b?i
+?   ??? ...
+??? public/
+?   ??? index.php           # Entry point
+?   ??? .htaccess           # URL rewrite
+?   ??? css/
+?   ?   ??? style.css       # Custom CSS
+?   ??? js/
+?   ?   ??? main.js         # Custom JavaScript
+?   ??? images/
+?   ??? uploads/
+?       ??? avatars/        # Avatar ng??i d?ng
+?       ??? documents/      # T?i li?u kh?a h?c
+?       ??? certificates/   # Ch?ng ch?
+??? .htaccess               # Root htaccess
+??? README.md               # File n?y
+```
+
+## ?? API Documentation
+
+### Authentication
+
+```javascript
+// Login
+POST /auth/login
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+
+// Register
+POST /auth/register
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123",
+  "role": "student"
+}
+```
+
+### Courses
+
+```javascript
+// Get all courses
+GET /course
+
+// Get course detail
+GET /course/view/{id}
+
+// Enroll in course
+POST /course/enroll/{id}
+
+// Complete lesson
+POST /course/completeLesson/{lessonId}
+```
+
+### Quiz
+
+```javascript
+// Take quiz
+GET /quiz/take/{quizId}
+
+// Submit quiz
+POST /quiz/submit/{quizId}
+{
+  "answers": {
+    "1": "A",
+    "2": "B"
+  }
+}
+```
+
+### Chat
+
+```javascript
+// Send message
+POST /chat/send
+{
+  "receiver_id": 2,
+  "message": "Hello!"
+}
+
+// Get new messages
+GET /chat/getNew?contact_id=2&last_id=10
+```
+
+## ?? Screenshots
+
+### Trang ch?
+![Home Page](docs/screenshots/home.png)
+
+### Dashboard H?c sinh
+![Student Dashboard](docs/screenshots/dashboard-student.png)
+
+### Kh?a h?c
+![Course View](docs/screenshots/course-view.png)
+
+### Quiz
+![Quiz](docs/screenshots/quiz.png)
+
+### Dark Mode
+![Dark Mode](docs/screenshots/dark-mode.png)
+
+## ?? ??ng g?p
+
+Ch?ng t?i lu?n hoan ngh?nh m?i ??ng g?p! N?u b?n mu?n:
+
+1. Fork d? ?n
+2. T?o branch m?i (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. M? Pull Request
+
+## ?? B?o l?i
+
+N?u b?n g?p l?i, vui l?ng t?o issue t?i: [GitHub Issues](#)
+
+Khi b?o l?i, vui l?ng cung c?p:
+- M? t? chi ti?t l?i
+- C?c b??c t?i hi?n
+- Screenshots (n?u c?)
+- Phi?n b?n PHP, MySQL
+- Th?ng b?o l?i (error messages)
+
+## ?? To-Do List
+
+- [ ] Th?m t?nh n?ng live streaming
+- [ ] T?ch h?p thanh to?n online
+- [ ] Mobile app (React Native/Flutter)
+- [ ] AI g?i ? kh?a h?c th?ng minh h?n
+- [ ] H? tr? ?a ng?n ng? ho?n ch?nh
+- [ ] PWA support
+- [ ] Video call gi?a gi?o vi?n - h?c sinh
+
+## ?? License
+
+D? ?n n?y ???c ph?t h?nh d??i [MIT License](LICENSE).
+
+```
+MIT License
+
+Copyright (c) 2024 Smart E-Learning Platform
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction...
+```
+
+## ?? T?c gi?
+
+- **Team Name**: Smart E-Learning Development Team
+- **Email**: contact@elearning.com
+- **Website**: https://elearning-platform.com
+
+## ?? L?i c?m ?n
+
+- Bootstrap Team
+- Font Awesome
+- Chart.js
+- SweetAlert2
+- AOS Library
+- V? t?t c? c?c th? vi?n open source ?? s? d?ng
+
+---
+
+<div align="center">
+
+**? N?u d? ?n h?u ?ch, h?y cho ch?ng t?i m?t star! ?**
+
+Made with ?? by Smart E-Learning Team
+
+[? V? ??u trang](#-smart-e-learning-platform-for-schools)
+
+</div>
